@@ -1,0 +1,12 @@
+server:
+  port: 19002
+
+spring:
+  application:
+    name: consul-demo-consumer
+  cloud:
+    consul:
+      host: 112.126.102.160
+      port: 18500
+      discovery:
+        serviceName: consul-demo-consumer

@@ -1,0 +1,31 @@
+server:
+  port: 19001
+
+spring:
+  application:
+    name: consul-demo-producer
+  cloud:
+    consul:
+      host: 112.126.102.160
+      port: 18500
+      discovery:
+        serviceName: consul-demo-producer
+#      inetutils:
+#        preferred-networks:
+#          - 公网ip1
+#          - 公网ip2
+      ribbon:
+        enabled: true #是否启用ribbon进行客户端负载均衡
+        config:
+          enable: true
+        discovery:
+          heartbeat: #配置是否进行health check，以及频率
+            enabled: true
+            ttlValue: 10
+          enable: true  #是否去发现其他服务
+          register: true #是否将自身服务注册到consul中
+          tags: tagName #为同名的服务打tag用于区分
+          default-query-tag: tagName
+          query-passing: true
+          preferIpAddress: true
+          instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
